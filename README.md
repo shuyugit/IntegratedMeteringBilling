@@ -10,7 +10,7 @@ IntegratedMeteringBilling
         function refreshRem(){  
             var width = docEl.getBoundingClientRect().width;  
             if (width / dpr > 540) {  
-                width = 540 * dpr;    //将本行540修改为width;  
+                width = *width* * dpr;   
             }
             var rem = width / 10;  
             docEl.style.fontSize = rem + 'px';  
