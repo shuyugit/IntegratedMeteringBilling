@@ -6,7 +6,7 @@ IntegratedMeteringBilling
 
 下载依赖后找到 node_modules\lib-flexible\flexible.js  
 修改  
-        ``
+        
         function refreshRem(){  
             var width = docEl.getBoundingClientRect().width;  
             if (width / dpr > 540) {  
@@ -16,4 +16,4 @@ IntegratedMeteringBilling
             docEl.style.fontSize = rem + 'px';  
             flexible.rem = win.rem = rem;  
         }
-        ``
+        
