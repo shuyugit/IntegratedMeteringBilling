@@ -210,14 +210,15 @@ export default {
   margin-bottom: 10px;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 .INputTitle {
-  width: 40%;
+  width: 25%;
   padding-left: 20px;
   text-align: left;
 }
 .inputSize {
-  width: 60%;
+  width: 50%;
   padding-right: 20px;
 }
 .acpTable {

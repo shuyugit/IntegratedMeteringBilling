@@ -1,3 +1,27 @@
+html {
+  overflow-y: scroll;
+
+}
+
+:root {
+  overflow-x: auto;
+
+  overflow-y: hidden
+}
+
+:root body {
+  position: absolute;
+
+}
+
+body {
+  width: 100vw;
+
+  overflow: hidden;
+
+}
+
+
 // 减小弹出菜单的项目高度
 .el-menu--popup {
   .el-menu-item {
@@ -26,9 +50,10 @@
     line-height: 34px;
     color: #FFF;
     text-align: center;
-    cursor:pointer;
+    cursor: pointer;
   }
-  .addBorder{
+
+  .addBorder {
     border-bottom: 2px solid #FFF;
   }
 }

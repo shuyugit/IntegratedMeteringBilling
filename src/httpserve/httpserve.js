@@ -4,7 +4,7 @@ import axios from 'axios'
 import qs from "qs"
 
 axios.defaults.timeout = 40000;
-axios.defaults.baseURL = "http://172.21.29.82:11010/esi/PChnlGroup";
+axios.defaults.baseURL = "http://172.21.29.55:9923/";
 // http request 拦截器
 axios.interceptors.request.use(
   config => {
@@ -46,6 +46,15 @@ axios.interceptors.response.use(
   }
 )
 /**
+ * 封装loginfo方法
+ * @param code
+ * @param data
+ * @returns {Promise}
+ */
+export function loginfo(msg, msg1, msg2) {
+  console.info((msg != '' && msg) ? msg : '', (msg1 != '' && msg1) ? msg1 : '', (msg2 != '' && msg2) ? msg2 : '')
+}
+/**
  * 封装errMsg请求
  * @param code
  * @param data
@@ -66,24 +75,14 @@ export function errMsg(msg = {}) {
  */
 
 export function post(method, data, msg = {}) {
-  const parameter = {
-    jyh: "",
-    parm: "",
-    sign: "",
-    ts: "",
-  }
   if (isEmptyObject(msg)) { } else {
-    // var toast = Toast.loading({
-    //   mask: true,
-    //   message: msg
-    // });
     this.fullscreenLoading = true;
   }
-  var calUrl = axios.defaults.baseURL + '?' + method
+  var calUrl = axios.defaults.baseURL + method
   return new Promise((resolve, reject) => {
-    parameter.jyh = code;
-    parameter.parm = JSON.stringify(data);
-    axios.post(calUrl, parameter)
+    var param = JSON.stringify(data);
+    console.info('转换后---', param)
+    axios.post(calUrl, param)
       .then(response => {
         if (isEmptyObject(msg)) { } else {
           setTimeout(function () {
@@ -97,7 +96,8 @@ export function post(method, data, msg = {}) {
       })
       .catch(err => {
         reject(err)
-        this.errMsg(err)
+        console.info(err)
+        // this.errMsg(err)
       })
   })
 }

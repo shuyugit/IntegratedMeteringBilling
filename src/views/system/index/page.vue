@@ -14,7 +14,7 @@ import dayjs from "dayjs";
 export default {
   name: "mainHomePage",
   components: {
-    card: card
+    card: card,
   },
   watch: {
     cavWidth(curVal, oldVal) {
@@ -43,7 +43,7 @@ export default {
         }
       }
       // console.log("高=" + curVal, oldVal);
-    }
+    },
   },
   data() {
     return {
@@ -60,21 +60,23 @@ export default {
         {
           BtnTit: "",
           BtnImg: "img/state05.png",
-          BtnMsg: ""
-        }
-      ]
+          BtnMsg: "",
+        },
+      ],
     };
   },
   mounted() {
     var _this = this;
+    this.getTest();
     this.timeInterval = setInterval(() => {
       this.refreshTime();
     }, 1000);
   },
   beforeDestroy() {
     console.info("消失");
-    if(this.timer) { //如果定时器还在运行 或者直接关闭，不用判断
-        clearInterval(this.timer); //关闭
+    if (this.timer) {
+      //如果定时器还在运行 或者直接关闭，不用判断
+      clearInterval(this.timer); //关闭
     }
     this.timer = null;
   },
@@ -90,17 +92,17 @@ export default {
         this.timeItem ? this.timeItem.VALUE * 1000 : 100000
       );
     },
-    getTimeLits: async function() {
+    getTimeLits: async function () {
       const db = await this.$store.dispatch("d2admin/db/database", {
-        user: true
+        user: true,
       });
       const timeList = db.get("timeList").value();
       const userInfo = db.get("userInfo").value();
-      this.timeItem = timeList.find(e => e.KEY === "ReError");
+      this.timeItem = timeList.find((e) => e.KEY === "ReError");
       console.info("信息", timeList);
       console.info("个人信息", userInfo);
     },
-    gotopage: function() {
+    gotopage: function () {
       this.$router.push({ path: "/abnormalInformation" });
     },
     showMsg(item, index) {
@@ -108,20 +110,22 @@ export default {
       this.$router.push({
         path: "/abnormalInformation",
         query: {
-          errbh: item.type == 0 ? item.ErrorCode : item.ErrorCode.slice(0, 1)
-        }
+          errbh: item.type == 0 ? item.ErrorCode : item.ErrorCode.slice(0, 1),
+        },
       });
     },
     refreshTime() {
       this.BtnList[0].BtnMsg = dayjs().format("HH:mm");
       this.BtnList[0].BtnTit = dayjs().format("YYYY年MM月DD日");
     },
-    
-    getTemper: function() {
+
+    getTest: function () {
       var that = this;
       var info = {};
+      info = { userName:"admin",passWord:"123456" };
       that.loading = true;
-      that.$post("1036", info, "获取中").then(response => {
+      this.$loginfo('测试-----')
+      that.$post("authorization?method=login", info, "获取中").then((response) => {
         console.info("获取环境温湿度", response);
         //  this.$message.error('获取接口失败');
         if (response.Code == 1) {
@@ -132,11 +136,11 @@ export default {
         }
       });
     },
-    getAir: function() {
+    getAir: function () {
       var that = this;
       var info = {};
       that.loading = true;
-      that.$post("1053", info, "获取中").then(response => {
+      that.$post("1053", info, "获取中").then((response) => {
         console.info("获取当前气压", response);
         //  this.$message.error('获取接口失败');
         if (response.Code == 1) {
@@ -146,12 +150,12 @@ export default {
         }
       });
     },
-    
-    getPontList: function() {
+
+    getPontList: function () {
       var that = this;
       var info = {};
       that.loading = true;
-      that.$post("1054", info, "获取中").then(response => {
+      that.$post("1054", info, "获取中").then((response) => {
         this.cavWidth = document.getElementById("heatmap2").clientWidth
           ? document.getElementById("heatmap2").clientWidth
           : "";
@@ -179,8 +183,8 @@ export default {
         }
         !this.timer && this.setTimeinter();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

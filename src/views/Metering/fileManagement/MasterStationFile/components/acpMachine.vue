@@ -84,8 +84,22 @@
           </el-table>
         </div>
       </div>
+      <div class="paginationContain">
+        <el-button type="danger" icon="el-icon-delete" size="small"
+          >删除</el-button
+        >
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="[100, 200, 300, 400]"
+          :page-size="100"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="400"
+        >
+        </el-pagination>
+      </div>
       <div slot="footer" class="dialog-footer newFooter">
-        <el-button type="danger" icon="el-icon-delete" circle></el-button>
         <el-button @click="closeFun">关闭</el-button>
       </div>
       <el-dialog
@@ -154,6 +168,7 @@ export default {
     return {
       activeName: this.$route.query.errbh ? this.$route.query.errbh : "all",
       searchMsg: "关闭网页信息",
+      currentPage: 1,
       inputList: [
         {
           name: "采集主机",
@@ -239,6 +254,12 @@ export default {
   mounted() {},
   beforeDestroy() {},
   methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
     closeFun() {
       this.$emit("closeAcpFUn", this.searchMsg);
     },
@@ -310,14 +331,15 @@ export default {
   margin-bottom: 10px;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 .INputTitle {
-  width: 40%;
+  width: 25%;
   padding-left: 20px;
   text-align: left;
 }
 .inputSize {
-  width: 60%;
+  width: 50%;
   padding-right: 20px;
 }
 .acpTable {
@@ -329,6 +351,15 @@ export default {
 }
 .newFooter {
   display: flex;
+  justify-content: flex-end;
+}
+.paginationContain {
+  width: 100%;
+  height: 60px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 }
 </style>

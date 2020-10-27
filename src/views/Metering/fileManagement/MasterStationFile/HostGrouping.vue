@@ -65,9 +65,10 @@
           <el-button
             @click="deletefun"
             type="danger"
+            size="small"
             icon="el-icon-delete"
-            circle
-          ></el-button>
+            >删除</el-button
+          >
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
@@ -139,7 +140,7 @@ export default {
   mounted() {},
   beforeDestroy() {},
   methods: {
-     handleEdit() {},
+    handleEdit() {},
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },
@@ -160,9 +161,7 @@ export default {
     closeMachinePop() {
       this.closeMachineflag = false;
     },
-    deletefun() {
-
-    }
+    deletefun() {},
   },
 };
 </script>

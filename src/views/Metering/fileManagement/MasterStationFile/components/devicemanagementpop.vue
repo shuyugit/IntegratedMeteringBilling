@@ -365,12 +365,13 @@ export default {
   flex-wrap: wrap;
 }
 .demo-input-suffix {
-  width: 49%;
+  width: 50%;
   height: auto;
   display: flex;
   margin-bottom: 10px;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 .INputTitle {
   width: 40%;

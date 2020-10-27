@@ -130,7 +130,7 @@ export default {
       showflag: false,
       acpWayFlag: false,
       acpMachineFlag: false,
-      currentPage4: 4,
+      currentPage4: 1,
       tableData: [
         {
           wayName: "网络",

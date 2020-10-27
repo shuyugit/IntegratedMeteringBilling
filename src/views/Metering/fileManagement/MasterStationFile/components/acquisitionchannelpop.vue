@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="修改采集机组信息"
+      title="修改通道信息"
       :visible="showflag"
       :show-close="false"
       width="30%"
@@ -47,8 +47,8 @@
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="closeFun">保存</el-button>
-        <el-button @click="closeFun">关闭</el-button>
+        <el-button type="primary" @click="closeFun">立即创建</el-button>
+        <el-button @click="closeFun">取消</el-button>
       </span>
     </el-dialog>
   </div>
@@ -57,7 +57,7 @@
 <script>
 /* eslint-disable */
 export default {
-  name: "hostGroupPop",
+  name: "acquisitionchannelpop",
   props: ["showflag"],
   components: {},
   data() {
@@ -66,12 +66,34 @@ export default {
       searchMsg: "关闭网页信息",
       inputList: [
         {
-          name: "采集机组名称", //title
+          name: "通道组名称", //title
           value: "", //输入值
-          placeMsg: "采集机组名称", //placehold提示
+          placeMsg: "填写通道组名称", //placehold提示
           type: 1, //type1输入框，2下拉框,3textArea
           isMust: 1, //1必须，0非必填
           option: [], //下拉选项
+        },
+
+        {
+          name: "通道组类型",
+          value: "",
+          type: 2, //type1输入框，2下拉框
+          placeMsg: "请选择通道组类型",
+          isMust: 1, //1必须，0非必填
+          option: [
+            {
+              value: "1",
+              label: "专线连接",
+            },
+            {
+              value: "0",
+              label: "网络",
+            },
+            {
+              value: "0",
+              label: "TCP服务",
+            },
+          ],
         },
         {
           name: "是否有效",
@@ -89,6 +111,14 @@ export default {
               label: "否",
             },
           ],
+        },
+        {
+          name: "显示顺序",
+          value: "",
+          type: 1, //type1输入框，2下拉框
+          placeMsg: "填写别名",
+          isMust: 0, //1必须，0非必填
+          option: [],
         },
       ],
     };
@@ -115,7 +145,7 @@ export default {
 .el-dialog__header {
   border-bottom: 1px solid #dedede;
 }
-#hostGroupPop {
+#acquisitionchannelpop {
   width: 100%;
   height: 100%;
   display: flex;
@@ -138,14 +168,15 @@ export default {
   margin-bottom: 10px;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 .INputTitle {
-  width: 40%;
+  width: 25%;
   padding-left: 20px;
   text-align: left;
 }
 .inputSize {
-  width: 60%;
+  width: 50%;
   padding-right: 20px;
 }
 </style>

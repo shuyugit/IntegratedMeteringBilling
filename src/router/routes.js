@@ -53,7 +53,7 @@ const frameIn = [
           title: '主站设备管理',
           auth: true
         },
-        component: _import('Metering/MasterStationFile/deviceManagement')
+        component: _import('Metering/fileManagement/MasterStationFile/deviceManagement')
       },
       //采集通道管理
       {
@@ -63,7 +63,7 @@ const frameIn = [
           title: '采集通道管理',
           auth: true
         },
-        component: _import('Metering/MasterStationFile/AcquisitionChannel')
+        component: _import('Metering/fileManagement/MasterStationFile/AcquisitionChannel')
       },
       {
         path: 'HostGrouping',
@@ -72,7 +72,7 @@ const frameIn = [
           title: '采集主机分组',
           auth: true
         },
-        component: _import('Metering/MasterStationFile/HostGrouping')
+        component: _import('Metering/fileManagement/MasterStationFile/HostGrouping')
       },
       {
         path: 'TimedTasks',
@@ -81,7 +81,7 @@ const frameIn = [
           title: '定时任务配置',
           auth: true
         },
-        component: _import('Metering/MasterStationFile/TimedTasks')
+        component: _import('Metering/fileManagement/MasterStationFile/TimedTasks')
       },
       //资产统计
       {
@@ -91,7 +91,7 @@ const frameIn = [
           title: '定时任务配置',
           auth: true
         },
-        component: _import('Metering/AssetStatistics/dataCheck')
+        component: _import('Metering/fileManagement/AssetStatistics/dataCheck')
       },
       {
         path: 'EquipmentStatistics',
@@ -100,7 +100,7 @@ const frameIn = [
           title: '终端设备统计',
           auth: true
         },
-        component: _import('Metering/AssetStatistics/EquipmentStatistics')
+        component: _import('Metering/fileManagement/AssetStatistics/EquipmentStatistics')
       },
       {
         path: 'MeterStatistics',
@@ -109,7 +109,7 @@ const frameIn = [
           title: '表计设备统计',
           auth: true
         },
-        component: _import('Metering/AssetStatistics/MeterStatistics')
+        component: _import('Metering/fileManagement/AssetStatistics/MeterStatistics')
       },
       {
         path: 'simCard',
@@ -118,7 +118,7 @@ const frameIn = [
           title: 'Sim卡档案统计',
           auth: true
         },
-        component: _import('Metering/AssetStatistics/simCard')
+        component: _import('Metering/fileManagement/AssetStatistics/simCard')
       },
       {
         path: 'SystemSize',
@@ -127,7 +127,7 @@ const frameIn = [
           title: '系统规模查询',
           auth: true
         },
-        component: _import('Metering/AssetStatistics/SystemSize')
+        component: _import('Metering/fileManagement/AssetStatistics/SystemSize')
       },
       //电网档案
       {
@@ -137,7 +137,7 @@ const frameIn = [
           title: '档案合理性检查',
           auth: true
         },
-        component: _import('Metering/electricArchives/FileRationalityCheck')
+        component: _import('Metering/fileManagement/electricArchives/FileRationalityCheck')
       },
       {
         path: 'electricFileManagement',
@@ -146,7 +146,7 @@ const frameIn = [
           title: '电网档案管理',
           auth: true
         },
-        component: _import('Metering/electricArchives/electricFileManagement')
+        component: _import('Metering/fileManagement/electricArchives/electricFileManagement')
       },
       {
         path: 'modelManagement',
@@ -155,7 +155,7 @@ const frameIn = [
           title: '汇总模型管理',
           auth: true
         },
-        component: _import('Metering/electricArchives/modelManagement')
+        component: _import('Metering/fileManagement/electricArchives/modelManagement')
       },
       {
         path: 'LineLossModel',
@@ -164,7 +164,7 @@ const frameIn = [
           title: '线损模型管理',
           auth: true
         },
-        component: _import('Metering/electricArchives/LineLossModel')
+        component: _import('Metering/fileManagement/electricArchives/LineLossModel')
       },
       {
         path: 'sectorManagement',
@@ -173,7 +173,7 @@ const frameIn = [
           title: '抄表区段管理',
           auth: true
         },
-        component: _import('Metering/electricArchives/sectorManagement')
+        component: _import('Metering/fileManagement/electricArchives/sectorManagement')
       },
 
     ]
