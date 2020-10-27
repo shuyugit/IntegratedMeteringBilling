@@ -1,11 +1,11 @@
 IntegratedMeteringBilling
 技术栈：D2admin+vue+element
 
-下载依赖：npm i
+下载依赖：npm i  
 启动：npm run dev
 
-下载依赖后找到 node_modules\lib-flexible\flexible.js
-修改
+下载依赖后找到 node_modules\lib-flexible\flexible.js  
+修改  
         ```function refreshRem(){
             var width = docEl.getBoundingClientRect().width;
             if (width / dpr > 540) {
