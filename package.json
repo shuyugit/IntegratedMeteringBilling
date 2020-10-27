@@ -1,5 +1,5 @@
 {
-  "name": "xinao",
+  "name": "wsdAdmin",
   "version": "1.7.2",
   "scripts": {
     "serve": "vue-cli-service serve --open",
