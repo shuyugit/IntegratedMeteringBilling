@@ -139,7 +139,6 @@ export default {
       formLogin: {
         username: "",
         password: "",
-        code: "v9am",
       },
       // 表单校验
       rules: {
@@ -224,22 +223,34 @@ export default {
       });
     },
     submit() {
-      var that = this;
-      var info = {
-        loginAccount: this.formLogin.username,
-        password: this.formLogin.password,
-      };
-      var userinfo = {
-        ID: "9260ae35-6b3b-4593-8e42-b0f5ece16123",
-        LoginAccount: "admin",
-        Name: "管理员",
-        CodeName: "001",
-        Phone: "17521216340",
-        DateTime: "2020-03-25T14:14:07",
-        _DateTime: "2020-03-25 14:14",
-      };
-      this.fetchData(userinfo);
-      this.loginMsg(userinfo);
+      this.$post("authorization?method=login", this.formLogin, "登录中").then((response) => {
+        if (response.Code == 1) {
+        } else {
+          this.$message({
+            showClose: true,
+            message: response.Msg,
+            type: "error",
+          })
+        }
+      }).catch(err=>{
+          console.log(JSON.stringify(err),88888888888)
+      })
+      // var that = this;
+      // var info = {
+      //   loginAccount: this.formLogin.username,
+      //   password: this.formLogin.password,
+      // };
+      // var userinfo = {
+      //   ID: "9260ae35-6b3b-4593-8e42-b0f5ece16123",
+      //   LoginAccount: "admin",
+      //   Name: "管理员",
+      //   CodeName: "001",
+      //   Phone: "17521216340",
+      //   DateTime: "2020-03-25T14:14:07",
+      //   _DateTime: "2020-03-25 14:14",
+      // };
+      // this.fetchData(userinfo);
+      // this.loginMsg(userinfo);
     },
   },
 };
@@ -250,8 +261,12 @@ export default {
   @extend %unable-select;
   $backgroundColor: #f0f2f5;
   // ---
-  background-color: $backgroundColor;
+  width: 100%;
   height: 100%;
+  background-image: url('./image/loginbakground.jpg');
+  background-size:100% 100%;
+  background-position: center 0;
+  background-repeat: no-repeat;
   position: relative;
   // 层
   .page-login--layer {

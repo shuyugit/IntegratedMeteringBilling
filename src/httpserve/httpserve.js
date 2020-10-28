@@ -4,14 +4,15 @@ import axios from 'axios'
 import qs from "qs"
 
 axios.defaults.timeout = 40000;
-axios.defaults.baseURL = "http://172.21.29.55:9923/";
+axios.defaults.baseURL = "http://172.21.29.14:9922/";
 // http request 拦截器
 axios.interceptors.request.use(
   config => {
     // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
-    config.data = qs.stringify(config.data);
+    // config.data = qs.stringify(config.data);
     config.headers = {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json;charset=utf-8'
+      // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     }
     // if(token){
     //   config.params = {'token':token}
@@ -80,7 +81,7 @@ export function post(method, data, msg = {}) {
   }
   var calUrl = axios.defaults.baseURL + method
   return new Promise((resolve, reject) => {
-    var param = JSON.stringify(data);
+    var param = data
     console.info('转换后---', param)
     axios.post(calUrl, param)
       .then(response => {
