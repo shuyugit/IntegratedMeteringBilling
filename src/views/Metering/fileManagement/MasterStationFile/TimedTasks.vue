@@ -213,10 +213,22 @@ export default {
         {
           wayName: "网络",
           wayType: "TCP服务",
-          Effective: "是",
+         
           order: 20,
           wayMaintain: "1",
           hostmachine: "1",
+
+          detail:'',
+          taskName:"",
+          tsakNum:'',
+          taskType:'',
+          priority:'',
+ Effective: "是",
+ pontType:'',
+ objAttr:'',
+ time:'',
+ cycle:'',
+ cycleCp:'',
         },
       ],
       tableData3: [
