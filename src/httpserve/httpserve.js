@@ -92,7 +92,7 @@ export function post(method, data, msg = {}) {
           }, 500)
         }
         // var result = JSON.parse(response.data.result)
-        resolve(response);
+        resolve(response.data);
       }, err => {
         reject(err)
       })
