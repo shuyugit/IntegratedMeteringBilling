@@ -49,8 +49,8 @@ export default {
   },
   methods: {
     fetchData: async function () {
-      const db = await this.$store.dispatch("d2admin/account/login");
-      var id = db.get("ID").value();
+      const db = await this.$store.dispatch('d2admin/user/load');
+      var id = db.value();
       console.info("ID信息---", id);
     },
     getTimeLits: async function () {

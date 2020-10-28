@@ -14,12 +14,15 @@
         </el-radio-group>
       </div>
       <div class="showMainPart">
-        <Split v-model="split3">
-          <div slot="left" class="demo-split-pane no-padding">
+        <Split v-model="split3" >
+          <div slot="left" class="demo-split-pane no-padding showHieghtAll">
+            <div class="tableTileBar">任务模板</div>
             <el-table
               ref="multipleTable"
               :data="tableData"
               stripe
+              row-key="id"
+              border
               tooltip-effect="dark"
               style="width: 100%"
             >
@@ -27,46 +30,38 @@
                 align="center"
                 type="selection"
               ></el-table-column>
+              <el-table-column align="center" prop="Name" label="名称">
+              </el-table-column>
               <el-table-column
                 align="center"
-                prop="wayName"
-                label="采集机组名称"
-              >
-              </el-table-column>
+                prop="isdefault"
+                label="是否默认"
+              ></el-table-column>
               <el-table-column
                 align="center"
                 prop="Effective"
                 label="是否有效"
               ></el-table-column>
-              <el-table-column align="center" label="分配主机">
-                <template slot-scope="scope">
-                  <el-button
-                    size="mini"
-                    type="text"
-                    @click="handMation(scope.$index, scope.row)"
-                    >{{ "主机个数：" + scope.row.hostmachine }}</el-button
-                  >
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="操作">
-                <template slot-scope="scope">
-                  <el-button
-                    size="mini"
-                    type="text"
-                    @click="handleEdit(scope.$index, scope.row)"
-                    >详情</el-button
-                  >
-                </template>
-              </el-table-column>
             </el-table>
+            <div class="tableFooterBar">
+              <el-button
+                @click="deletefun1"
+                type="danger"
+                size="small"
+                icon="el-icon-delete"
+                >删 除</el-button
+              >
+            </div>
           </div>
           <div slot="right" class="demo-split-pane rightSplit">
             <Split v-model="split4">
-              <div slot="top" class="demo-split-pane">
+              <div slot="left" class="demo-split-pane showHieghtAll">
+                <div class="tableTileBar">可选任务列表</div>
                 <el-table
                   ref="multipleTable2"
                   :data="tableData2"
                   stripe
+                  border
                   tooltip-effect="dark"
                   style="width: 100%"
                 >
@@ -106,12 +101,23 @@
                     </template>
                   </el-table-column>
                 </el-table>
+                <div class="tableFooterBar">
+                  <el-button
+                    @click="deletefun2"
+                    type="danger"
+                    size="small"
+                    icon="el-icon-delete"
+                    >删 除</el-button
+                  >
+                </div>
               </div>
-              <div slot="bottom" class="demo-split-pane">
+              <div slot="right" class="demo-split-pane showHieghtAll">
+                <div class="tableTileBar">任务数据项</div>
                 <el-table
                   ref="multipleTable3"
                   :data="tableData3"
                   stripe
+                  border
                   tooltip-effect="dark"
                   style="width: 100%"
                 >
@@ -151,6 +157,15 @@
                     </template>
                   </el-table-column>
                 </el-table>
+                <div class="tableFooterBar">
+                  <el-button
+                    @click="deletefun3"
+                    type="danger"
+                    size="small"
+                    icon="el-icon-delete"
+                    >删 除</el-button
+                  >
+                </div>
               </div>
             </Split>
           </div>
@@ -174,15 +189,27 @@ export default {
       split4: 1,
       tableData: [
         {
-          wayName: "网络",
-          wayType: "TCP服务",
+          id: "01",
+          Name: "网络",
           Effective: "是",
-          order: 10,
-          wayMaintain: "1",
-          hostmachine: "1",
+          isdefault: "是",
+          children: [
+            {
+              id: "02",
+              Name: "网络",
+              Effective: "是",
+              isdefault: "是",
+            },
+            {
+              id: "03",
+              Name: "网络",
+              Effective: "是",
+              isdefault: "是",
+            },
+          ],
         },
       ],
-      tableData1: [
+      tableData2: [
         {
           wayName: "网络",
           wayType: "TCP服务",
@@ -206,7 +233,11 @@ export default {
   },
   mounted() {},
   beforeDestroy() {},
-  methods: {},
+  methods: {
+    deletefun1() {},
+    deletefun2() {},
+    deletefun3() {},
+  },
 };
 </script>
 
@@ -216,7 +247,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: rgba(248, 248, 248, 1);
+  /* background: rgba(248, 248, 248, 1); */
   padding: 10px 20px;
 }
 .showMainPart {
@@ -225,12 +256,48 @@ export default {
   padding: 0px 26px 0px 26px;
   margin-top: 10px;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 1);
+  overflow: hidden;
+  /* background: rgba(255, 255, 255, 1); */
 }
 .rightSplit {
   height: 100%;
   width: 100%;
 }
+.tableTileBar {
+  width: 100%;
+  height: 58px;
+  font-size: 18px;
+  color: #303133;
+  line-height: 58px;
+  padding-left: 24px;
+}
+.demo-split-pane {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.tableFooterBar {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.demo-split-pane{
+  height:100%;
+  
+}
+.showHieghtAll{
+  background: #FFF;
+  padding:0px 10px;
+  box-sizing: border-box;
+}
+/* .demo-split-pane{
+  height: 100%;
+  width: 100%;
+} */
 </style>
 
 <style>
