@@ -167,6 +167,7 @@ export default {
     };
   },
   mounted() {
+    
     this.timeInterval = setInterval(() => {
       this.refreshTime();
     }, 1000);
