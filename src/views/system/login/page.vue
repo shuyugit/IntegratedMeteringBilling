@@ -223,8 +223,46 @@ export default {
       });
     },
     submit() {
-      this.$post("authorization?method=login", this.formLogin, "登录中").then((response) => {
-        console.info('成功数据--------',response)
+      this.$post("authorization?method=login", this.formLogin, "登录中").then((res) => {
+        if (res.access_token) {
+          localStorage.setItem('userInfo', JSON.stringify(res.user_info))
+          this.$router.push({name: 'index'})
+          // // 获取下拉菜单集合
+          // this.$sysApi.getAllDropMap('-1').then((res) => {
+          //   localStorage.setItem('DropMap', JSON.stringify(res))
+          // }).catch(err => {
+          //   console.log(err)
+          //   this.$Message.error('服务器错误请求失败')
+          // })
+          //
+          // // 获取下拉K-V关系
+          // this.$sysApi.getAllDropKV('1').then((res) => {
+          //   localStorage.setItem('DropKV', JSON.stringify(res))
+          //   this.$router.push({
+          //     // name: 'upComing'
+          //     name: 'home'
+          //   })
+          // }).catch(err => {
+          //   console.log(err)
+          //   this.$Message.error('服务器错误请求失败')
+          // })
+          // // 获取营业区域
+          // this.$sysApi.getSysDropFromSql().then((res) => {
+          //   localStorage.setItem('SysDropMap', JSON.stringify(res))
+          // }).catch(err => {
+          //   console.log(err)
+          //   this.$Message.error('服务器错误请求失败')
+          // })
+        } else {
+          let reg = /[\u4e00-\u9fa5]/g
+          let names = res.msg.match(reg)
+          let str = names.join('')
+          this.$message({
+            showClose: true,
+            message: str,
+            type: "error",
+          });
+        }
 
       }).catch(err=>{
           console.log(err,88888888888)
