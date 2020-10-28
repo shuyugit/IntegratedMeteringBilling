@@ -105,7 +105,7 @@
 /* eslint-disable */
 
 import dayjs from "dayjs";
-import axios from "axios";
+import util from '@/libs/util.js';
 import low from "lowdb";
 import LocalStorage from "lowdb/adapters/LocalStorage";
 import { mapActions } from "vuex";
@@ -225,7 +225,7 @@ export default {
     submit() {
       this.$post("authorization?method=login", this.formLogin, "登录中").then((res) => {
         if (res.access_token) {
-          localStorage.setItem('userInfo', JSON.stringify(res.user_info))
+          util.cookies.set('token', res.token_type + ' ' + res.access_token)
           this.$router.push({name: 'index'})
           // // 获取下拉菜单集合
           // this.$sysApi.getAllDropMap('-1').then((res) => {
@@ -282,7 +282,7 @@ export default {
       //   _DateTime: "2020-03-25 14:14",
       // };
       // this.fetchData(userinfo);
-      // this.loginMsg(userinfo);
+
     },
   },
 };
