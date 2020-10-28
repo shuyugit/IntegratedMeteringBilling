@@ -1,11 +1,19 @@
 <template>
   <d2-container>
     <div id="TimedTasks">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item>计量</el-breadcrumb-item>
-        <el-breadcrumb-item>主站档案</el-breadcrumb-item>
-        <el-breadcrumb-item>定时任务配置</el-breadcrumb-item>
-      </el-breadcrumb>
+      <div class="tabSwitchPart">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item>计量</el-breadcrumb-item>
+          <el-breadcrumb-item>主站档案</el-breadcrumb-item>
+          <el-breadcrumb-item>定时任务配置</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-radio-group v-model="tabPosition" style="margin-bottom: 30px">
+          <el-radio-button label="top">采集任务编制</el-radio-button>
+          <el-radio-button label="right">计算任务编制</el-radio-button>
+          <el-radio-button label="bottom">数据考核规则</el-radio-button>
+        </el-radio-group>
+      </div>
+
       <div class="showMainPart"></div>
     </div>
   </d2-container>
@@ -20,13 +28,12 @@ export default {
   data() {
     return {
       activeName: this.$route.query.errbh ? this.$route.query.errbh : "all",
+      
     };
   },
   mounted() {},
   beforeDestroy() {},
-  methods: {
-   
-  },
+  methods: {},
 };
 </script>
 
@@ -47,7 +54,14 @@ export default {
   box-sizing: border-box;
   background: rgba(255, 255, 255, 1);
 }
-
+.tabSwitchPart {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
 </style>
 
 <style>

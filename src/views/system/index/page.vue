@@ -9,6 +9,7 @@
 <script>
 /* eslint-disable */
 import card from "../../../components/main/card";
+import axios from "axios";
 import dayjs from "dayjs";
 
 export default {
@@ -118,23 +119,44 @@ export default {
       this.BtnList[0].BtnMsg = dayjs().format("HH:mm");
       this.BtnList[0].BtnTit = dayjs().format("YYYY年MM月DD日");
     },
-
     getTest: function () {
+      this.$loginfo('11___________')
+      axios({
+        url: "http://172.21.29.82:11010/esi/PChnlGroup?method=findByKey",
+        method: "post",
+        //发送格式为json
+        data: "{id:12}",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then(
+        function (return_data) {
+          alert(return_data);
+        },
+        function (return_data) {
+          //alert(return_data)
+        }
+      );
+    },
+    getTest2: function () {
       var that = this;
       var info = {};
-      info = { userName:"admin",passWord:"123456" };
+      // info = { userName:"admin",passWord:"123456" };
+      info = { id: 1 };
       that.loading = true;
-      this.$loginfo('测试-----')
-      that.$post("authorization?method=login", info, "获取中").then((response) => {
-        console.info("获取环境温湿度", response);
-        //  this.$message.error('获取接口失败');
-        if (response.Code == 1) {
-          this.BtnList[1].BtnMsg = response.Data.temperature;
-          this.BtnList[2].BtnMsg = response.Data.humidity;
-        } else {
-          // this.$message.error('获取接口失败');
-        }
-      });
+      this.$loginfo("测试-----");
+      that
+        .$post("esi/PChnlGroup?method=findByKey", info, "获取中")
+        .then((response) => {
+          console.info("获取环境温湿度", response);
+          //  this.$message.error('获取接口失败');
+          if (response.Code == 1) {
+            this.BtnList[1].BtnMsg = response.Data.temperature;
+            this.BtnList[2].BtnMsg = response.Data.humidity;
+          } else {
+            // this.$message.error('获取接口失败');
+          }
+        });
     },
     getAir: function () {
       var that = this;

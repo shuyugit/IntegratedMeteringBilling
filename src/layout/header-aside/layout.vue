@@ -45,30 +45,10 @@
           <!-- <d2-header-fullscreen/> -->
           <!-- <d2-header-theme/> -->
           <!-- <d2-header-size/>-->
-          -->
+         
           <!-- <d2-header-locales/> -->
           <!-- <d2-header-search @click="handleSearchClick"/>  -->
           <d2-header-user />
-          <div class="selfCreatBtn">
-            <div
-              @click="choseType(1)"
-              :class="['selfCreatBtnItem', { addBorder: choseIndex == 1 }]"
-            >
-              营销
-            </div>
-            <div
-              @click="choseType(2)"
-              :class="['selfCreatBtnItem', { addBorder: choseIndex == 2 }]"
-            >
-              计量
-            </div>
-            <div
-              @click="choseType(3)"
-              :class="['selfCreatBtnItem', { addBorder: choseIndex == 3 }]"
-            >
-              基础
-            </div>
-          </div>
         </div>
       </div>
       <!-- 下面 主体 -->
