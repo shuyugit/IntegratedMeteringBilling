@@ -1,11 +1,13 @@
 <template>
   <d2-container>
     <div id="HostGrouping">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item>计量</el-breadcrumb-item>
-        <el-breadcrumb-item>主站档案</el-breadcrumb-item>
-        <el-breadcrumb-item>采集主机分组</el-breadcrumb-item>
-      </el-breadcrumb>
+      <div class="tabSwitchPartRoot">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item>计量</el-breadcrumb-item>
+          <el-breadcrumb-item>主站档案</el-breadcrumb-item>
+          <el-breadcrumb-item>采集主机分组</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
       <div class="showMainPart">
         <div class="showMTitle">主站设备管理</div>
         <div class="operationBar">
@@ -173,13 +175,13 @@ export default {
   display: flex;
   flex-direction: column;
   background: rgba(248, 248, 248, 1);
-  padding: 20px 20px;
+  padding: 10px 20px;
 }
 .showMainPart {
   width: 100%;
   height: 100%;
   padding: 0px 26px 0px 26px;
-  margin-top: 20px;
+  margin-top: 10px;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 1);
 }
@@ -222,14 +224,8 @@ export default {
   border-right: 1px solid #e4e7ed;
   border-bottom: 1px solid #e4e7ed;
 }
-.pagitionSelf {
-  height: 60px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
+
+
 </style>
 
 <style>

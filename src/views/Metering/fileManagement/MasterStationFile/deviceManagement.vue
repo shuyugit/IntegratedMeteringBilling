@@ -1,11 +1,13 @@
 <template>
   <d2-container>
     <div id="deviceManagement">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item>计量</el-breadcrumb-item>
-        <el-breadcrumb-item>主站档案</el-breadcrumb-item>
-        <el-breadcrumb-item>主站设备管理</el-breadcrumb-item>
-      </el-breadcrumb>
+      <div class="tabSwitchPartRoot">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item>计量</el-breadcrumb-item>
+          <el-breadcrumb-item>主站档案</el-breadcrumb-item>
+          <el-breadcrumb-item>主站设备管理</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
       <div class="showMainPart">
         <div class="showMTitle">主站设备管理</div>
         <div class="operationBar">
@@ -76,7 +78,8 @@
             type="danger"
             size="small"
             icon="el-icon-delete"
-          >删 除</el-button>
+            >删 除</el-button
+          >
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
@@ -182,13 +185,13 @@ export default {
   display: flex;
   flex-direction: column;
   background: rgba(248, 248, 248, 1);
-  padding: 20px 20px;
+  padding: 10px 20px;
 }
 .showMainPart {
   width: 100%;
   height: 100%;
   padding: 0px 26px 0px 26px;
-  margin-top: 20px;
+  margin-top: 10px;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 1);
 }

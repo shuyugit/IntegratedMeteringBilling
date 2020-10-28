@@ -224,16 +224,10 @@ export default {
     },
     submit() {
       this.$post("authorization?method=login", this.formLogin, "登录中").then((response) => {
-        if (response.Code == 1) {
-        } else {
-          this.$message({
-            showClose: true,
-            message: response.Msg,
-            type: "error",
-          })
-        }
+        console.info('成功数据--------',response)
+
       }).catch(err=>{
-          console.log(JSON.stringify(err),88888888888)
+          console.log(err,88888888888)
       })
       // var that = this;
       // var info = {
@@ -241,7 +235,7 @@ export default {
       //   password: this.formLogin.password,
       // };
       // var userinfo = {
-      //   ID: "9260ae35-6b3b-4593-8e42-b0f5ece16123",
+      //   ID: "9260ae35-6b3b-4593-8e42-b0f5ece16123",f
       //   LoginAccount: "admin",
       //   Name: "管理员",
       //   CodeName: "001",

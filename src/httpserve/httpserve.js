@@ -4,7 +4,7 @@ import axios from 'axios'
 import qs from "qs"
 
 axios.defaults.timeout = 40000;
-axios.defaults.baseURL = "http://172.21.29.14:9922/";
+axios.defaults.baseURL = "http://172.21.29.55:9926/";
 // http request 拦截器
 axios.interceptors.request.use(
   config => {
@@ -20,6 +20,7 @@ axios.interceptors.request.use(
     return config;
   },
   error => {
+    console.info('error-----',error)
     if (error.code === 'ECONNABORTED' && error.message.indexOf('timeout') !== -1) {
       this.$message.error('错了哦，这是一条错误消息');
       ("请求超时")
@@ -70,7 +71,7 @@ export function errMsg(msg = {}) {
 }
 /**
  * 封装post请求
- * @param code
+ * @param method
  * @param data
  * @returns {Promise}
  */
@@ -90,8 +91,8 @@ export function post(method, data, msg = {}) {
             this.fullscreenLoading = false;
           }, 500)
         }
-        var result = JSON.parse(response.data.result)
-        resolve(result);
+        // var result = JSON.parse(response.data.result)
+        resolve(response);
       }, err => {
         reject(err)
       })

@@ -41,7 +41,7 @@ export default {
   width: 100%;
   height: 100%;
   padding: 0px 26px 0px 26px;
-  margin-top: 20px;
+  margin-top: 10px;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 1);
 }

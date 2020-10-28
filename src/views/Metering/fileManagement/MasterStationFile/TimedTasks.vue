@@ -1,16 +1,16 @@
 <template>
   <d2-container>
     <div id="TimedTasks">
-      <div class="tabSwitchPart">
+      <div class="tabSwitchPartRoot">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item>计量</el-breadcrumb-item>
           <el-breadcrumb-item>主站档案</el-breadcrumb-item>
           <el-breadcrumb-item>定时任务配置</el-breadcrumb-item>
         </el-breadcrumb>
-        <el-radio-group v-model="tabPosition" style="margin-bottom: 30px">
-          <el-radio-button label="top">采集任务编制</el-radio-button>
-          <el-radio-button label="right">计算任务编制</el-radio-button>
-          <el-radio-button label="bottom">数据考核规则</el-radio-button>
+        <el-radio-group v-model="tabPosition" size='small' >
+          <el-radio-button label="collection">采集任务编制</el-radio-button>
+          <el-radio-button label="calculation">计算任务编制</el-radio-button>
+          <el-radio-button label="assessment">数据考核规则</el-radio-button>
         </el-radio-group>
       </div>
 
@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       activeName: this.$route.query.errbh ? this.$route.query.errbh : "all",
+      tabPosition:'collection',
       
     };
   },
@@ -44,24 +45,17 @@ export default {
   display: flex;
   flex-direction: column;
   background: rgba(248, 248, 248, 1);
-  padding: 20px 20px;
+  padding: 10px 20px;
 }
 .showMainPart {
   width: 100%;
   height: 100%;
   padding: 0px 26px 0px 26px;
-  margin-top: 20px;
+  margin-top: 10px;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 1);
 }
-.tabSwitchPart {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
+
 </style>
 
 <style>

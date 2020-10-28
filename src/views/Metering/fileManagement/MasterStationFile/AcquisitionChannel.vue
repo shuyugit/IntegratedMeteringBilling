@@ -1,11 +1,13 @@
 <template>
   <d2-container>
     <div id="AcquisitionChannel">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item>计量</el-breadcrumb-item>
-        <el-breadcrumb-item>主站档案</el-breadcrumb-item>
-        <el-breadcrumb-item>采集通道管理</el-breadcrumb-item>
-      </el-breadcrumb>
+      <div class="tabSwitchPartRoot">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item>计量</el-breadcrumb-item>
+          <el-breadcrumb-item>主站档案</el-breadcrumb-item>
+          <el-breadcrumb-item>采集通道管理</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
       <div class="showMainPart">
         <div class="showMTitle">主站设备管理</div>
         <div class="operationBar">
@@ -30,6 +32,7 @@
             stripe
             tooltip-effect="dark"
             style="width: 100%"
+            @selection-change="handleSelectionChange"
           >
             <el-table-column align="center" type="selection"></el-table-column>
             <el-table-column align="center" prop="wayName" label="通道组名称">
@@ -84,7 +87,8 @@
             type="danger"
             size="small"
             icon="el-icon-delete"
-          >删除</el-button>
+            >删除</el-button
+          >
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
@@ -159,7 +163,9 @@ export default {
       ],
     };
   },
-  mounted() {},
+  mounted() {
+    console.info("数据--------", [...this.tableData]);
+  },
   beforeDestroy() {},
   methods: {
     handleEdit() {},
@@ -182,17 +188,22 @@ export default {
       //维护通道
       this.acpWayFlag = true;
     },
-    handMation(value,value1) { //主机维护
+    handMation(value, value1) {
+      //主机维护
       this.acpMachineFlag = true;
     },
     closeAcpFUn() {
       //维护通道
       this.acpWayFlag = false;
     },
-    closeAcpMachineFUn() { //主机维护
+    closeAcpMachineFUn() {
+      //主机维护
       this.acpMachineFlag = false;
     },
-
+    handleSelectionChange(val) {
+      this.$loginfo(val);
+      // this.multipleSelection = val;
+    },
     deletefun() {
       // this.$store.dispatch('d2admin/menu/asideCollapseSet', true)
       // var list = [
@@ -215,13 +226,13 @@ export default {
   display: flex;
   flex-direction: column;
   background: rgba(248, 248, 248, 1);
-  padding: 20px 20px;
+  padding: 10px 20px;
 }
 .showMainPart {
   width: 100%;
   height: 100%;
   padding: 0px 26px 0px 26px;
-  margin-top: 20px;
+  margin-top: 10px;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 1);
 }

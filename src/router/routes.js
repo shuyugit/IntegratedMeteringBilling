@@ -17,7 +17,7 @@ const frameIn = [
         path: 'index',
         name: 'index',
         meta: {
-          auth: true
+          auth: false
         },
         component: _import('system/index')
       },
