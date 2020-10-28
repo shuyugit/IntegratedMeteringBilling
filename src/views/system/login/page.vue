@@ -167,6 +167,7 @@ export default {
     };
   },
   mounted() {
+    
     this.timeInterval = setInterval(() => {
       this.refreshTime();
     }, 1000);
@@ -223,28 +224,27 @@ export default {
       });
     },
     submit() {
-      this.$post("authorization?method=login", this.formLogin, "登录中").then((response) => {
-        console.info('成功数据--------',response)
-
-      }).catch(err=>{
-          console.log(err,88888888888)
-      })
-      // var that = this;
-      // var info = {
-      //   loginAccount: this.formLogin.username,
-      //   password: this.formLogin.password,
-      // };
-      // var userinfo = {
-      //   ID: "9260ae35-6b3b-4593-8e42-b0f5ece16123",f
-      //   LoginAccount: "admin",
-      //   Name: "管理员",
-      //   CodeName: "001",
-      //   Phone: "17521216340",
-      //   DateTime: "2020-03-25T14:14:07",
-      //   _DateTime: "2020-03-25 14:14",
-      // };
-      // this.fetchData(userinfo);
-      // this.loginMsg(userinfo);
+      // this.$post("authorization?method=login", this.formLogin, "登录中").then((response) => {
+      //   console.info('成功数据--------',response)
+      // }).catch(err=>{
+      //     console.log(err,88888888888)
+      // })
+      var that = this;
+      var info = {
+        loginAccount: this.formLogin.username,
+        password: this.formLogin.password,
+      };
+      var userinfo = {
+        ID: "9260ae35-6b3b-4593-8e42-b0f5ece16123",
+        LoginAccount: "admin",
+        Name: "管理员",
+        CodeName: "001",
+        Phone: "17521216340",
+        DateTime: "2020-03-25T14:14:07",
+        _DateTime: "2020-03-25 14:14",
+      };
+      this.fetchData(userinfo);
+      this.loginMsg(userinfo);
     },
   },
 };

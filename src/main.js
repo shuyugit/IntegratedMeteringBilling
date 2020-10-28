@@ -33,7 +33,7 @@ import { Split } from 'view-design';
 require('video.js/dist/video-js.css')
 require('vue-video-player/src/custom-theme.css')
 
-Vue.component('iSplit', Split);
+Vue.component('Split', Split);
 Vue.use(Viewer)
 Vue.use(VideoPlayer)
 Vue.use(Heatmap)

@@ -31,12 +31,14 @@ export default {
     };
   },
   mounted() {
+    this.fetchData();
     var _this = this;
     this.getTest();
     this.timeInterval = setInterval(() => {
       this.refreshTime();
     }, 1000);
   },
+
   beforeDestroy() {
     console.info("消失");
     if (this.timer) {
@@ -46,7 +48,11 @@ export default {
     this.timer = null;
   },
   methods: {
-    
+    fetchData: async function () {
+      const db = await this.$store.dispatch("d2admin/account/login");
+      var id = db.get("ID").value();
+      console.info("ID信息---", id);
+    },
     getTimeLits: async function () {
       const db = await this.$store.dispatch("d2admin/db/database", {
         user: true,
@@ -79,7 +85,7 @@ export default {
       that.loading = true;
       this.$loginfo("测试-----222");
       that
-        .$post("eis/DropSql?method=findByKey", info, "获取中")
+        .$post("eis/PChnlGroup?method=findByKey", info, "获取中")
         .then((response) => {
           console.info("获取环境温湿度", response);
           if (response.Code == 1) {
