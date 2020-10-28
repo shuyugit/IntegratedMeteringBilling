@@ -25,9 +25,7 @@ import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
 import Viewer from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
 import Heatmap from 'heatmap.js'
-import {
-  post, errMsg, loginfo
-} from './httpserve/httpserve'
+import {post, errMsg, loginfo,fetch} from './httpserve/httpserve'
 import 'view-design/dist/styles/iview.css';
 import { Split } from 'view-design';
 require('video.js/dist/video-js.css')
@@ -38,6 +36,7 @@ Vue.use(Viewer)
 Vue.use(VideoPlayer)
 Vue.use(Heatmap)
 Vue.prototype.$post = post;
+Vue.prototype.$fetch = fetch;
 Vue.prototype.$errMsg = errMsg;
 Vue.prototype.$loginfo = loginfo;
 // fade/zoom 等

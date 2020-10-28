@@ -2,6 +2,7 @@ import { mapState } from 'vuex'
 import menuMixin from '../mixin/menu'
 import { elMenuItem, elSubmenu } from '../libs/util.menu'
 import BScroll from 'better-scroll'
+import menuAside from "@/menu/aside";
 
 export default {
   name: 'd2-layout-header-aside-menu-side',
@@ -53,6 +54,17 @@ export default {
     }
   },
   mounted () {
+    this.$fetch("auth/menu/auth/table").then((res) => {
+      if (res.statusCode === 200) {
+        // this.menuLists = res.resultData
+        this.$store.commit('d2admin/menu/asideSet', res.resultData)
+      } else {
+        this.$message.error(res.message)
+      }
+
+    }).catch(err=>{
+      console.log(err)
+    })
     this.scrollInit()
   },
   beforeDestroy () {
