@@ -198,6 +198,9 @@ export default {
     },
     closePop(data) {
       console.info("关闭网页", data);
+      if(data=='update'){
+        this.getDataList()
+      }
       this.showflag = false;
     },
     handleSelectionChange(val) {
@@ -209,6 +212,7 @@ export default {
       if (type == 1) {
         this.popType = 1;
         this.showflag = true;
+        this.$refs.child1.callMethod('');
       } else {
         this.popType = 2;
         this.itemid = value.id;

@@ -47,9 +47,7 @@
           </div>
         </div>
         <div class="demo-input-suffix">
-          <div class="INputTitle">
-            别名
-          </div>
+          <div class="INputTitle">别名</div>
           <div class="inputSize">
             <el-input
               placeholder="请填写别名"
@@ -61,7 +59,8 @@
         <div class="demo-input-suffix">
           <div class="INputTitle">
             <span style="color: red">*</span>
-            是否有效</div>
+            是否有效
+          </div>
           <div class="inputSize">
             <el-select
               size="mini"
@@ -110,9 +109,7 @@
           </div>
         </div>
         <div class="demo-input-suffix">
-          <div class="INputTitle">
-            A网地址
-          </div>
+          <div class="INputTitle">A网地址</div>
           <div class="inputSize">
             <el-input
               placeholder="请填写A网地址"
@@ -122,9 +119,7 @@
           </div>
         </div>
         <div class="demo-input-suffix">
-          <div class="INputTitle">
-            B网地址
-          </div>
+          <div class="INputTitle">B网地址</div>
           <div class="inputSize">
             <el-input
               placeholder="请填写B网地址"
@@ -134,9 +129,7 @@
           </div>
         </div>
         <div class="demo-input-suffix">
-          <div class="INputTitle">
-            C网地址
-          </div>
+          <div class="INputTitle">C网地址</div>
           <div class="inputSize">
             <el-input
               placeholder="请填写C网地址"
@@ -146,9 +139,7 @@
           </div>
         </div>
         <div class="demo-input-suffix">
-          <div class="INputTitle">
-            D网地址
-          </div>
+          <div class="INputTitle">D网地址</div>
           <div class="inputSize">
             <el-input
               placeholder="请填写D网地址"
@@ -230,9 +221,7 @@
           </div>
         </div>
         <div class="demo-input-suffix">
-          <div class="INputTitle">
-            计算通信端口1
-          </div>
+          <div class="INputTitle">计算通信端口1</div>
           <div class="inputSize">
             <el-input
               placeholder="请填写计算通信端口1"
@@ -243,9 +232,7 @@
           </div>
         </div>
         <div class="demo-input-suffix">
-          <div class="INputTitle">
-            计算通信端口2
-          </div>
+          <div class="INputTitle">计算通信端口2</div>
           <div class="inputSize">
             <el-input
               placeholder="请填写计算通信端口2"
@@ -256,9 +243,7 @@
           </div>
         </div>
         <div class="demo-input-suffix">
-          <div class="INputTitle">
-            心跳端口1
-          </div>
+          <div class="INputTitle">心跳端口1</div>
           <div class="inputSize">
             <el-input
               placeholder="请填写心跳端口1"
@@ -269,9 +254,7 @@
           </div>
         </div>
         <div class="demo-input-suffix">
-          <div class="INputTitle">
-            心跳端口2
-          </div>
+          <div class="INputTitle">心跳端口2</div>
           <div class="inputSize">
             <el-input
               placeholder="请填写心跳端口2"
@@ -433,9 +416,7 @@
           </div>
         </div> -->
         <div class="demo-input-suffix2">
-          <div class="INputTitle2">
-            备注
-          </div>
+          <div class="INputTitle2">备注</div>
           <div class="inputSize2">
             <el-input
               placeholder="请填写备注"
@@ -608,7 +589,42 @@ export default {
       this.$emit("closePop", this.searchMsg);
     },
     callMethod(res) {
-      this.getDataDetail(res);
+      if (res == "") {
+        this.bindMsg = {
+          id: "",
+          code: "",
+          name: "",
+          alias: "",
+          status: "",
+          type: "",
+          wherein: "",
+          neta: "",
+          netb: "",
+          netd: "",
+          nete: "",
+          dactrlFlag: "",
+          daFlag: "",
+          calcctrlFlag: "",
+          calcFlag: "",
+          comport1: "",
+          comport2: "",
+          hbPort1: "",
+          hbPort2: "",
+          mqFlag: "",
+          webFlag: "",
+          eventFlag: "",
+          dbFlag: "",
+          remark: "",
+          daGroup: "",
+          weight: "",
+          creatorId: "",
+          createDate: "",
+          lastModifierId: "",
+          lastModifyTime: "",
+        };
+      } else {
+        this.getDataDetail(res);
+      }
     },
     getDataDetail(id) {
       var that = this;
@@ -624,13 +640,21 @@ export default {
     },
     insertList() {
       var that = this;
-      if(this.bindMsg.name==''||!this.bindMsg.name||this.bindMsg.name==undefined){
-        
-        return
+      if (
+        this.bindMsg.name == "" ||
+        !this.bindMsg.name ||
+        this.bindMsg.name == undefined
+      ) {
+        this.$message.error("请填写名称");
+        return;
       }
-      if(this.bindMsg.name==''||!this.bindMsg.name||this.bindMsg.name==undefined){
-
-        return 
+      if (
+        this.bindMsg.status == "" ||
+        !this.bindMsg.status ||
+        this.bindMsg.status == undefined
+      ) {
+        this.$message.error("请选择是否有效");
+        return;
       }
       var info = { ...this.bindMsg };
       that
@@ -641,7 +665,7 @@ export default {
               message: response.message,
               type: "success",
             });
-            this.$emit("closePop", this.searchMsg);
+            this.$emit("closePop", "update");
             // this.tableData = response.resultData;
           } else {
             this.$message.error(response.message);
@@ -659,10 +683,10 @@ export default {
               message: response.message,
               type: "success",
             });
-            this.$emit("closePop", this.searchMsg);
+            this.$emit("closePop", "update");
             // this.tableData = response.resultData;
           } else {
-             this.$message.error(response.message);
+            this.$message.error(response.message);
           }
         });
     },
