@@ -1,53 +1,458 @@
 <template>
   <div>
     <el-dialog
-      title="新建系统节点"
+      :title="popType == 1 ? '新建系统节点' : '修改系统节点'"
       :visible="showflag"
       :show-close="false"
       width="50%"
     >
       <div class="inputPart">
-        <div
-          v-for="(item, index) in inputList"
-          :key="'devpop' + index"
-          class="demo-input-suffix"
-        >
+        <!-- <div class="demo-input-suffix">
           <div class="INputTitle">
-            <span v-if="item.isMust == 1" style="color: red">*</span>
-            {{ item.name }}
+            <span style="color: red">*</span>
+            编码
           </div>
           <div class="inputSize">
             <el-input
-              v-if="item.type == 1"
-              :placeholder="item.placeMsg"
+              placeholder="请填写编码"
               size="mini"
-              v-model="item.value"
+              v-model="bindMsg.id"
             ></el-input>
+          </div>
+        </div> -->
+        <!-- <div class="demo-input-suffix">
+          <div class="INputTitle">
+            <span style="color: red">*</span>
+            编号
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写编号"
+              size="mini"
+              v-model="bindMsg.code"
+            ></el-input>
+          </div>
+        </div> -->
+        <div class="demo-input-suffix">
+          <div class="INputTitle">
+            <span style="color: red">*</span>
+            名称
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写名称"
+              size="mini"
+              v-model="bindMsg.name"
+            ></el-input>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">
+            别名
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写别名"
+              size="mini"
+              v-model="bindMsg.alias"
+            ></el-input>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">
+            <span style="color: red">*</span>
+            是否有效</div>
+          <div class="inputSize">
             <el-select
               size="mini"
-              v-if="item.type == 2"
-              v-model="item.value"
-              :placeholder="item.placeMsg"
+              v-model="bindMsg.status"
+              placeholder="选择是否可用"
             >
               <el-option
-                v-for="acppop in item.option"
+                v-for="acppop in statusList"
                 :key="acppop.value"
                 :label="acppop.label"
                 :value="acppop.value"
               >
               </el-option>
             </el-select>
+          </div>
+        </div>
+        <!-- <div class="demo-input-suffix">
+          <div class="INputTitle">
+            <span style="color: red">*</span>
+            节点类型
+          </div>
+          <div class="inputSize">
             <el-input
-              v-if="item.type == 3"
+              placeholder="请填写节点类型"
+              size="mini"
+              v-model="bindMsg.type"
+            ></el-input>
+          </div>
+        </div> -->
+        <div class="demo-input-suffix">
+          <div class="INputTitle">部署区域</div>
+          <div class="inputSize">
+            <el-select
+              size="mini"
+              v-model="bindMsg.wherein"
+              placeholder="选择部署区域"
+            >
+              <el-option
+                v-for="acppop in whereinList"
+                :key="acppop.value"
+                :label="acppop.label"
+                :value="acppop.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">
+            A网地址
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写A网地址"
+              size="mini"
+              v-model="bindMsg.neta"
+            ></el-input>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">
+            B网地址
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写B网地址"
+              size="mini"
+              v-model="bindMsg.netb"
+            ></el-input>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">
+            C网地址
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写C网地址"
+              size="mini"
+              v-model="bindMsg.netd"
+            ></el-input>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">
+            D网地址
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写D网地址"
+              size="mini"
+              v-model="bindMsg.nete"
+            ></el-input>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">采集控制中心</div>
+          <div class="inputSize">
+            <el-select
+              size="mini"
+              v-model="bindMsg.dactrlFlag"
+              placeholder="选择采集控制中心标识"
+            >
+              <el-option
+                v-for="acppop in dactrlFlagList"
+                :key="acppop.value"
+                :label="acppop.label"
+                :value="acppop.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">前置机</div>
+          <div class="inputSize">
+            <el-select
+              size="mini"
+              v-model="bindMsg.daFlag"
+              placeholder="选择前置机标识"
+            >
+              <el-option
+                v-for="acppop in daFlagList"
+                :key="acppop.value"
+                :label="acppop.label"
+                :value="acppop.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">计算任务中心</div>
+          <div class="inputSize">
+            <el-select
+              size="mini"
+              v-model="bindMsg.calcctrlFlag"
+              placeholder="选择计算任务中心标识"
+            >
+              <el-option
+                v-for="acppop in calcctrlFlagList"
+                :key="acppop.value"
+                :label="acppop.label"
+                :value="acppop.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">计算服务</div>
+          <div class="inputSize">
+            <el-select
+              size="mini"
+              v-model="bindMsg.calcFlag"
+              placeholder="选择计算服务"
+            >
+              <el-option
+                v-for="acppop in calcFlagList"
+                :key="acppop.value"
+                :label="acppop.label"
+                :value="acppop.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">
+            计算通信端口1
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写计算通信端口1"
+              size="mini"
+              type="number"
+              v-model="bindMsg.comport1"
+            ></el-input>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">
+            计算通信端口2
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写计算通信端口2"
+              size="mini"
+              type="number"
+              v-model="bindMsg.comport2"
+            ></el-input>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">
+            心跳端口1
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写心跳端口1"
+              size="mini"
+              type="number"
+              v-model="bindMsg.hbPort1"
+            ></el-input>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">
+            心跳端口2
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写心跳端口2"
+              size="mini"
+              type="number"
+              v-model="bindMsg.hbPort2"
+            ></el-input>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">MQ中心</div>
+          <div class="inputSize">
+            <el-select
+              size="mini"
+              v-model="bindMsg.mqFlag"
+              placeholder="选择MQ中心标识"
+            >
+              <el-option
+                v-for="acppop in mqFlagList"
+                :key="acppop.value"
+                :label="acppop.label"
+                :value="acppop.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">WEB主机</div>
+          <div class="inputSize">
+            <el-select
+              size="mini"
+              v-model="bindMsg.webFlag"
+              placeholder="选择WEB主机标识"
+            >
+              <el-option
+                v-for="acppop in webFlagList"
+                :key="acppop.value"
+                :label="acppop.label"
+                :value="acppop.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">事项服务器</div>
+          <div class="inputSize">
+            <el-select
+              size="mini"
+              v-model="bindMsg.eventFlag"
+              placeholder="选择事项服务器标识"
+            >
+              <el-option
+                v-for="acppop in eventFlagList"
+                :key="acppop.value"
+                :label="acppop.label"
+                :value="acppop.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="demo-input-suffix">
+          <div class="INputTitle">数据库</div>
+          <div class="inputSize">
+            <el-select
+              size="mini"
+              v-model="bindMsg.dbFlag"
+              placeholder="选择数据库服务器标识"
+            >
+              <el-option
+                v-for="acppop in dbFlagList"
+                :key="acppop.value"
+                :label="acppop.label"
+                :value="acppop.value"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
+
+        <!-- <div class="demo-input-suffix">
+          <div class="INputTitle">
+            <span style="color: red">*</span>
+            采集机组
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写采集机组"
+              size="mini"
+              v-model="bindMsg.daGroup"
+            ></el-input>
+          </div>
+        </div> -->
+        <!-- <div class="demo-input-suffix">
+          <div class="INputTitle">
+            <span style="color: red">*</span>
+            排序
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写排序"
+              size="mini"
+              v-model="bindMsg.weight"
+            ></el-input>
+          </div>
+        </div> -->
+        <!-- <div class="demo-input-suffix">
+          <div class="INputTitle">
+            <span style="color: red">*</span>
+            创建者
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写创建者"
+              size="mini"
+              v-model="bindMsg.creatorId"
+            ></el-input>
+          </div>
+        </div> -->
+        <!-- <div class="demo-input-suffix">
+          <div class="INputTitle">
+            <span style="color: red">*</span>
+            创建时间
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写创建时间"
+              size="mini"
+              v-model="bindMsg.createDate"
+            ></el-input>
+          </div>
+        </div> -->
+        <!-- <div class="demo-input-suffix">
+          <div class="INputTitle">
+            <span style="color: red">*</span>
+            最后修改者
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写最后修改者"
+              size="mini"
+              v-model="bindMsg.lastModifierId"
+            ></el-input>
+          </div>
+        </div> -->
+        <!-- <div class="demo-input-suffix">
+          <div class="INputTitle">
+            <span style="color: red">*</span>
+            最后修改时间
+          </div>
+          <div class="inputSize">
+            <el-input
+              placeholder="请填写最后修改时间"
+              size="mini"
+              v-model="bindMsg.lastModifyTime"
+            ></el-input>
+          </div>
+        </div> -->
+        <div class="demo-input-suffix2">
+          <div class="INputTitle2">
+            备注
+          </div>
+          <div class="inputSize2">
+            <el-input
+              placeholder="请填写备注"
+              size="mini"
               type="textarea"
-              :placeholder="item.placeMsg"
-              v-model="item.value"
+              v-model="bindMsg.remark"
             ></el-input>
           </div>
         </div>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="closeFun">立即创建</el-button>
+        <el-button v-if="popType == 1" type="primary" @click="insertList"
+          >立即创建</el-button
+        >
+        <el-button v-if="popType == 2" type="primary" @click="upDateList"
+          >确定修改</el-button
+        >
         <el-button @click="closeFun">关闭</el-button>
       </span>
     </el-dialog>
@@ -58,270 +463,140 @@
 /* eslint-disable */
 export default {
   name: "devicemanagementpop",
-  props: ["showflag"],
+  props: ["showflag", "id", "popType"],
   components: {},
   data() {
     return {
-      activeName: this.$route.query.errbh ? this.$route.query.errbh : "all",
-      searchMsg: "关闭网页信息",
-      inputList: [
+      bindMsg: {
+        id: "",
+        code: "",
+        name: "",
+        alias: "",
+        status: "",
+        type: "",
+        wherein: "",
+        neta: "",
+        netb: "",
+        netd: "",
+        nete: "",
+        dactrlFlag: "",
+        daFlag: "",
+        calcctrlFlag: "",
+        calcFlag: "",
+        comport1: "",
+        comport2: "",
+        hbPort1: "",
+        hbPort2: "",
+        mqFlag: "",
+        webFlag: "",
+        eventFlag: "",
+        dbFlag: "",
+        remark: "",
+        daGroup: "",
+        weight: "",
+        creatorId: "",
+        createDate: "",
+        lastModifierId: "",
+        lastModifyTime: "",
+      },
+      statusList: [
         {
-          name: "名称", //title
-          value: "", //输入值
-          placeMsg: "填写名称", //placehold提示
-          type: 1, //type1输入框，2下拉框,3textArea
-          isMust: 1, //1必须，0非必填
-          option: [], //下拉选项
+          value: "1",
+          label: "是",
         },
         {
-          name: "别名",
-          value: "",
-          type: 1, //type1输入框，2下拉框
-          placeMsg: "填写别名",
-          isMust: 0, //1必须，0非必填
-          option: [],
+          value: "0",
+          label: "否",
+        },
+      ],
+      whereinList: [
+        {
+          value: "1",
+          label: "是",
         },
         {
-          name: "是否有效",
-          value: "",
-          type: 2, //type1输入框，2下拉框
-          placeMsg: "请选择",
-          isMust: 1, //1必须，0非必填
-          option: [
-            {
-              value: "1",
-              label: "是",
-            },
-            {
-              value: "0",
-              label: "否",
-            },
-          ],
+          value: "0",
+          label: "否",
+        },
+      ],
+      dactrlFlagList: [
+        {
+          value: "1",
+          label: "是",
         },
         {
-          name: "部署区域",
-          value: "",
-          type: 2, //type1输入框，2下拉框
-          placeMsg: "选择部署区域",
-          isMust: 0, //1必须，0非必填
-          option: [
-            {
-              value: "1",
-              label: "第一区域",
-            },
-            {
-              value: "0",
-              label: "第二区域",
-            },
-          ],
+          value: "0",
+          label: "否",
+        },
+      ],
+      daFlagList: [
+        {
+          value: "1",
+          label: "是",
         },
         {
-          name: "A网址",
-          value: "",
-          type: 1, //type1输入框，2下拉框
-          placeMsg: "填写A网址",
-          isMust: 0, //1必须，0非必填
-          option: [],
+          value: "0",
+          label: "否",
+        },
+      ],
+      calcctrlFlagList: [
+        {
+          value: "1",
+          label: "是",
         },
         {
-          name: "B网址",
-          value: "",
-          type: 1, //type1输入框，2下拉框
-          placeMsg: "填写B网址",
-          isMust: 0, //1必须，0非必填
-          option: [],
+          value: "0",
+          label: "否",
+        },
+      ],
+      calcFlagList: [
+        {
+          value: "1",
+          label: "是",
         },
         {
-          name: "C网址",
-          value: "",
-          type: 1, //type1输入框，2下拉框
-          placeMsg: "填写C网址",
-          isMust: 0, //1必须，0非必填
-          option: [],
+          value: "0",
+          label: "否",
+        },
+      ],
+      mqFlagList: [
+        {
+          value: "1",
+          label: "是",
         },
         {
-          name: "D网址",
-          value: "",
-          type: 1, //type1输入框，2下拉框
-          placeMsg: "填写D网址",
-          isMust: 0, //1必须，0非必填
-          option: [],
+          value: "0",
+          label: "否",
+        },
+      ],
+      webFlagList: [
+        {
+          value: "1",
+          label: "是",
         },
         {
-          name: "采集控制中心",
-          value: "",
-          type: 2, //type1输入框，2下拉框
-          placeMsg: "选择采集控制中心",
-          isMust: 0, //1必须，0非必填
-          option: [
-            {
-              value: "1",
-              label: "是",
-            },
-            {
-              value: "0",
-              label: "否",
-            },
-          ],
+          value: "0",
+          label: "否",
+        },
+      ],
+      eventFlagList: [
+        {
+          value: "1",
+          label: "是",
         },
         {
-          name: "前置机",
-          value: "",
-          type: 2, //type1输入框，2下拉框
-          placeMsg: "选择前置机",
-          isMust: 0, //1必须，0非必填
-          option: [
-            {
-              value: "1",
-              label: "是",
-            },
-            {
-              value: "0",
-              label: "否",
-            },
-          ],
+          value: "0",
+          label: "否",
+        },
+      ],
+      dbFlagList: [
+        {
+          value: 1,
+          label: "是",
         },
         {
-          name: "计算任务中心",
-          value: "",
-          type: 2, //type1输入框，2下拉框
-          placeMsg: "选择计算任务中心",
-          isMust: 0, //1必须，0非必填
-          option: [
-            {
-              value: "1",
-              label: "是",
-            },
-            {
-              value: "0",
-              label: "否",
-            },
-          ],
-        },
-        {
-          name: "计算服务",
-          value: "",
-          type: 2, //type1输入框，2下拉框
-          placeMsg: "选择计算服务",
-          isMust: 0, //1必须，0非必填
-          option: [
-            {
-              value: "1",
-              label: "是",
-            },
-            {
-              value: "0",
-              label: "否",
-            },
-          ],
-        },
-        {
-          name: "计算通信端口1",
-          value: "",
-          type: 1, //type1输入框，2下拉框
-          placeMsg: "填写计算通信端口1",
-          isMust: 0, //1必须，0非必填
-          option: [],
-        },
-        {
-          name: "计算通信端口2",
-          value: "",
-          type: 1, //type1输入框，2下拉框
-          placeMsg: "填写计算通信端口2",
-          isMust: 0, //1必须，0非必填
-          option: [],
-        },
-        {
-          name: "心跳端口1",
-          value: "",
-          type: 1, //type1输入框，2下拉框
-          placeMsg: "填写心跳端口1",
-          isMust: 0, //1必须，0非必填
-          option: [],
-        },
-        {
-          name: "心跳端口2",
-          value: "",
-          type: 1, //type1输入框，2下拉框
-          placeMsg: "填写心跳端口2",
-          isMust: 0, //1必须，0非必填
-          option: [],
-        },
-        {
-          name: "MQ中心",
-          value: "",
-          type: 2, //type1输入框，2下拉框
-          placeMsg: "选择MQ中心",
-          isMust: 0, //1必须，0非必填
-          option: [
-            {
-              value: "1",
-              label: "是",
-            },
-            {
-              value: "0",
-              label: "否",
-            },
-          ],
-        },
-        {
-          name: "WEB",
-          value: "",
-          type: 2, //type1输入框，2下拉框
-          placeMsg: "选择WEB",
-          isMust: 0, //1必须，0非必填
-          option: [
-            {
-              value: "1",
-              label: "是",
-            },
-            {
-              value: "0",
-              label: "否",
-            },
-          ],
-        },
-        {
-          name: "事项服务器",
-          value: "",
-          type: 2, //type1输入框，2下拉框
-          placeMsg: "选择事项服务器",
-          isMust: 0, //1必须，0非必填
-          option: [
-            {
-              value: "1",
-              label: "是",
-            },
-            {
-              value: "0",
-              label: "否",
-            },
-          ],
-        },
-        {
-          name: "数据库",
-          value: "",
-          type: 2, //type1输入框，2下拉框
-          placeMsg: "选择数据库",
-          isMust: 0, //1必须，0非必填
-          option: [
-            {
-              value: "1",
-              label: "是",
-            },
-            {
-              value: "0",
-              label: "否",
-            },
-          ],
-        },
-        {
-          name: "备注",
-          value: "",
-          type: 3, //type1输入框，2下拉框
-          placeMsg: "填写备注",
-          isMust: 0, //1必须，0非必填
-          option: [],
+          value: 0,
+          label: "否",
         },
       ],
     };
@@ -333,9 +608,63 @@ export default {
       this.$emit("closePop", this.searchMsg);
     },
     callMethod(res) {
-      this.classID = JSON.parse(localStorage.choseClass).ClassID;
-      this.getClassRecord();
-      this.$logInfo("方法2:直接调用调用成功" + res);
+      this.getDataDetail(res);
+    },
+    getDataDetail(id) {
+      var that = this;
+      var info = { id: id };
+      that
+        .$post("eis/PSysNode?method=findByKey", info, "获取中")
+        .then((response) => {
+          if (response.statusCode == 200) {
+            this.bindMsg = response.resultData;
+          } else {
+          }
+        });
+    },
+    insertList() {
+      var that = this;
+      if(this.bindMsg.name==''||!this.bindMsg.name||this.bindMsg.name==undefined){
+        
+        return
+      }
+      if(this.bindMsg.name==''||!this.bindMsg.name||this.bindMsg.name==undefined){
+
+        return 
+      }
+      var info = { ...this.bindMsg };
+      that
+        .$post("eis/PSysNode?method=insert", info, "获取中")
+        .then((response) => {
+          if (response.statusCode == 200) {
+            this.$message({
+              message: response.message,
+              type: "success",
+            });
+            this.$emit("closePop", this.searchMsg);
+            // this.tableData = response.resultData;
+          } else {
+            this.$message.error(response.message);
+          }
+        });
+    },
+    upDateList() {
+      var that = this;
+      var info = { ...this.bindMsg };
+      that
+        .$post("eis/PSysNode?method=update", info, "获取中")
+        .then((response) => {
+          if (response.statusCode == 200) {
+            this.$message({
+              message: response.message,
+              type: "success",
+            });
+            this.$emit("closePop", this.searchMsg);
+            // this.tableData = response.resultData;
+          } else {
+             this.$message.error(response.message);
+          }
+        });
     },
   },
 };
@@ -373,13 +702,30 @@ export default {
   align-items: center;
   justify-content: center;
 }
+.demo-input-suffix2 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  margin-bottom: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.INputTitle2 {
+  width: 20%;
+  padding-left: 50px;
+  text-align: left;
+}
+.inputSize2 {
+  width: 70%;
+}
 .INputTitle {
   width: 40%;
-  padding-left: 20px;
+  padding-left: 50px;
   text-align: left;
 }
 .inputSize {
-  width: 60%;
+  width: 40%;
 }
 </style>
 
